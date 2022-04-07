@@ -150,7 +150,7 @@ Enemy_Bars.prototype.drawBar = function() {
 			var rate = currentHp/maxHp;
 			//Width of the bar
 			var width = $dataEnemies[enemyId].battlerWidth;
-			var xOffset = $dataEnemies[enemyId].battlerWidth / 2 + 16;
+			var xOffset = $dataEnemies[enemyId].battlerWidth / 2+16;
 			var x = $gameTroop._enemies[i]._screenX - xOffset;
 			var y = $gameTroop._enemies[i]._screenY - 32;
 			//Draw the guage

@@ -1,9 +1,9 @@
 [
 null,
-{"id":1,"animationId":11,"description":"Made by Levi's brother a long time ago.<br>\nDoes \\I[68] damage.","etypeId":1,"traits":[{"code":31,"dataId":7,"value":0}],"iconIndex":106,"name":"Origami Fist Cover","note":"","params":[0,0,8,0,0,0,0,0],"price":400,"wtypeId":1},
+{"id":1,"animationId":11,"description":"Made by Levi's brother a long time ago.<br>","etypeId":1,"traits":[],"iconIndex":106,"name":"Origami Fist Cover","note":"","params":[0,0,8,0,0,0,0,0],"price":400,"wtypeId":1},
 {"id":2,"animationId":1,"description":"Made with polyethylene plastic.<br>\n\\I[66]","etypeId":1,"traits":[{"code":31,"dataId":4,"value":0}],"iconIndex":110,"name":"Wiffle Bat","note":"","params":[0,0,6,0,0,0,0,0],"price":500,"wtypeId":4},
 {"id":3,"animationId":5,"description":"A cheap taser made in China.<br>\n\\I[69]","etypeId":1,"traits":[{"code":31,"dataId":3,"value":0}],"iconIndex":119,"name":"Flashlight Taser","note":"","params":[0,0,14,0,0,0,0,0],"price":699,"wtypeId":3},
-{"id":4,"animationId":6,"description":"First guitar you ever rocked. It's kind of sticky.<br> \nDoes \\I[64] damage.","etypeId":1,"traits":[{"code":31,"dataId":5,"value":0}],"iconIndex":200,"name":"Squier Strat","note":"","params":[0,0,6,0,0,0,0,0],"price":1000,"wtypeId":2},
+{"id":4,"animationId":6,"description":"First guitar you ever rocked. It's kind of sticky.<br>","etypeId":1,"traits":[],"iconIndex":200,"name":"Squier Strat","note":"","params":[0,0,6,0,0,0,0,0],"price":1000,"wtypeId":2},
 {"id":5,"animationId":0,"description":"Feels like the real thing!\n\\I[66]","etypeId":1,"traits":[{"code":31,"dataId":4,"value":0}],"iconIndex":200,"name":"Epiphone Les Paul","note":"","params":[0,0,0,0,0,0,0,0],"price":20000,"wtypeId":2},
 {"id":6,"animationId":11,"description":"Scientologists have confirmed these were truly blessed.<br>\nDoes \\I[64] damage.","etypeId":1,"traits":[{"code":31,"dataId":5,"value":0}],"iconIndex":106,"name":"Blessed Brass Knuckle","note":"","params":[0,0,12,1,0,0,2,0],"price":2599,"wtypeId":1},
 {"id":7,"animationId":1,"description":"Perfect for anal play.<br>\n\\I[67]","etypeId":1,"traits":[{"code":31,"dataId":2,"value":0}],"iconIndex":110,"name":"Oak Bat","note":"","params":[0,0,17,0,0,0,0,0],"price":2000,"wtypeId":4},
