@@ -25,7 +25,13 @@
         {"image": "038", "image_mode": "tiled", "effect": { "type": "horizontal_interlaced", "amplitude": 2,"frequency": 1  }, "palette_shift": 1, "scroll": [0, -1]},
         {"image": "119", "image_mode": "stretched", "effect": { "type": "horizontal", "amplitude": 2,"frequency": 4  }, "palette_shift": 4, "scroll": [1, 0]},
         {"image": "135", "image_mode": "stretched", "effect": { "type": "horizontal", "amplitude": 1,"frequency": 4  }, "palette_shift": 2, "scroll": [1, 0]},
-        {"image": "131", "image_mode": "tiled", "effect": { "type": "horizontal", "amplitude": 16,"frequency": 4  }, "palette_shift": 8, "scroll": [-1, 0]}
+        {"image": "131", "image_mode": "tiled", "effect": { "type": "horizontal", "amplitude": 16,"frequency": 4  }, "palette_shift": 8, "scroll": [-1, 0]},
+        {"image": "300", "image_mode": "stretched", "palette_shift": 32, "scroll": [0, 1]},
+        {"image": "297", "image_mode": "stretched", "palette_shift": 32, "scroll": [0, 0]},
+        {"image": "301", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":16}, "palette_shift": 16, "scroll": [1, 0]},
+        {"image": "316", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":16}, "palette_shift": 8, "scroll": [1, 0]},
+        {"image": "099", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":2,"frequency":4}, "palette_shift": 16, "scroll": [1, 0]},
+        {"image": "320", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":4}, "palette_shift": 8, "scroll": [1, 0]}
     ],
     "configurations": {
         "alta": [1, 0],
@@ -93,5 +99,17 @@
         	"layers": [26, 27],
         	"speed": 1.5
         },
+        "diamonds": {
+        	"layers": [29, 28],
+        	"speed": 1.5
+        },
+        "stirring": {
+        	"layers": [30, 31],
+        	"speed": 1
+        },
+        "diamonds2": {
+        	"layers": [32, 33],
+        	"speed": 1
+        }
     }
 }
