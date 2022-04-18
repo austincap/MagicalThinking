@@ -237,6 +237,8 @@ BattleManager.isBusy = function() {
 };
 
 BattleManager.isBattleEnd = function() {
+    console.log($gameParty);
+    console.log($gameTroop);
     return ($gameParty.isAllDead() || $gameTroop.isAllDead());
 };
 

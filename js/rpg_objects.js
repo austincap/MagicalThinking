@@ -241,6 +241,10 @@ Game_System.prototype.onBattleEscape = function() {
     this._escapeCount++;
 };
 
+Game_System.prototype.onTalkDefeat = function() {
+    console.log("talk defeat");
+};
+
 Game_System.prototype.onBeforeSave = function() {
     this._saveCount++;
     this._versionId = $dataSystem.versionId;
@@ -4767,7 +4771,8 @@ Game_Unit.prototype.select = function(activeMember) {
 
 
 Game_Unit.prototype.isAllDead = function(enemiesInTroop) {
-    //console.log("IS ALL DEAD ENEMY?");
+    console.log("IS ALL DEAD ENEMY?");
+    console.log(enemiesInTroop);
     var are_they_dead = 0;
     enemiesInTroop.forEach(function(member){
         if(member._hp > 0){

@@ -1,3 +1,3 @@
 Window_BattleLog.prototype.messageSpeed = function() {
-    return 32;
+    return 50;
 };

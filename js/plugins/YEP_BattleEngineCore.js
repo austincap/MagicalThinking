@@ -1925,7 +1925,7 @@ BattleManager.processTalkDefeat = function() {
     } else {
         AudioManager.stopBgm();
     }
-    this.endBattle(2);
+    this.endBattle(3);
 };
 
 BattleManager.endBattle = function(result) {
@@ -1939,6 +1939,8 @@ BattleManager.endBattle = function(result) {
         $gameSystem.onTalkWin();
     } else if (this._escaped) {
         $gameSystem.onBattleEscape();
+    } else if (result === 3) {
+    	$gameSystem.onTalkDefeat();
     }
 };
 
