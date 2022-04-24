@@ -31,7 +31,19 @@
         {"image": "301", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":16}, "palette_shift": 16, "scroll": [1, 0]},
         {"image": "316", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":16}, "palette_shift": 8, "scroll": [1, 0]},
         {"image": "099", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":2,"frequency":4}, "palette_shift": 16, "scroll": [1, 0]},
-        {"image": "320", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":4}, "palette_shift": 8, "scroll": [1, 0]}
+        {"image": "320", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":4}, "palette_shift": 8, "scroll": [1, 0]},
+        {"image": "105", "image_mode": "stretched", "palette_shift": 16, "scroll": [0, 1]},
+        {"image": "109", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":4}, "palette_shift": 4, "scroll": [1, -1]},
+        {"image": "135", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "182", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "050", "image_mode": "tiled", "effect":{"type":"vertical","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "051", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "093", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [-1, 1]},
+        {"image": "094", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":16}, "palette_shift": 16, "scroll": [1, 1]},
+        {"image": "286", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [-1, 1]},
+        {"image": "291", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":4,"frequency":16}, "palette_shift": 8, "scroll": [0, 1]},
+        {"image": "305", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "306", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]}
     ],
     "configurations": {
         "alta": [1, 0],
@@ -110,6 +122,31 @@
         "diamonds2": {
         	"layers": [32, 33],
         	"speed": 1
+        },
+        "smoked": {
+        	"layers": [34, 35],
+        	"speed": 1
+        },
+        "trick": {
+        	"layers": [36, 37],
+        	"speed": 1
+        },
+        "orangediamonds": {
+            "layers": [38, 39],
+            "speed": 1
+        },
+        "diagnol_lines": {
+            "layers": [40, 20],
+            "speed": 1
+        },
+        "right_and_down": {
+            "layers": [42, 43],
+            "speed": 1
+        },
+        "circle_flowers": {
+            "layers": [44, 45],
+            "speed": 0.5
         }
+
     }
 }
