@@ -43,7 +43,11 @@
         {"image": "286", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [-1, 1]},
         {"image": "291", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":4,"frequency":16}, "palette_shift": 8, "scroll": [0, 1]},
         {"image": "305", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
-        {"image": "306", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]}
+        {"image": "306", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "107", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "098", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "198", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":2,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "195", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]}
     ],
     "configurations": {
         "alta": [1, 0],
@@ -146,6 +150,14 @@
         "circle_flowers": {
             "layers": [44, 45],
             "speed": 0.5
+        },
+        "central_arrows": {
+            "layers": [46, 47],
+            "speed": 1
+        },
+        "central_diamonds": {
+            "layers": [48, 49],
+            "speed": 1
         }
 
     }
