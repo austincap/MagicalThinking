@@ -46,7 +46,9 @@
         {"image": "107", "image_mode": "tiled", "effect":{"type":"vertical","amplitude":2,"frequency":8}, "palette_shift": 4, "scroll": [1, 1]},
         {"image": "098", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
         {"image": "198", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":2,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
-        {"image": "195", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]}
+        {"image": "195", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "298", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":2,"frequency":4}, "palette_shift": 8, "scroll": [0, 1]},
+        {"image": "290", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":4}, "palette_shift": 4, "scroll": [0, 1]}
     ],
     "configurations": {
         "alta": [1, 0],
@@ -157,6 +159,10 @@
         "central_diamonds": {
             "layers": [48, 49],
             "speed": 1
+        },
+        "redstars": {
+            "layers": [50, 51],
+            "speed": 2
         }
 
     }
