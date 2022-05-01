@@ -1,5 +1,4 @@
-{ "layers": [ {"image": "002", "image_mode": "stretched", "palette_shift": 0},
-        {"image": "009", "image_mode": "tiled", "effect": { "type": "horizontal_interlaced", "amplitude": 256, "frequency": 3}, "palette_shift": 2, "scroll": [0, 1]},
+{ "layers": [ {"image": "002", "image_mode": "stretched", "palette_shift": 0}, {"image": "009", "image_mode": "tiled", "effect": { "type": "horizontal_interlaced", "amplitude": 256, "frequency": 3}, "palette_shift": 2, "scroll": [0, 1]},
         {"image": "003", "image_mode": "tiled", "palette_shift": 0, "effect": {"type": "horizontal_interlaced", "amplitude": 64, "frequency": 1}, "scroll": [0, 1]},
         {"image": "007", "image_mode": "tiled", "effect": {"type": "horizontal", "amplitude": 256,"frequency": 1}, "palette_shift": 4, "scroll": [0, -1]},
         {"image": "321", "image_mode": "tiled", "palette_shift": 1, "scroll": [0, 1]},
@@ -35,16 +34,16 @@
         {"image": "105", "image_mode": "stretched", "palette_shift": 16, "scroll": [0, 1]},
         {"image": "109", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":4}, "palette_shift": 4, "scroll": [1, -1]},
         {"image": "135", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
-        {"image": "182", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
-        {"image": "050", "image_mode": "tiled", "effect":{"type":"vertical","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "182", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":16}, "palette_shift": 16, "scroll": [0, 1]},
+        {"image": "050", "image_mode": "tiled", "effect":{"type":"vertical","amplitude":1,"frequency":4}, "palette_shift": 4, "scroll": [0, 1]},
         {"image": "051", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
         {"image": "093", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [-1, 1]},
         {"image": "094", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":16}, "palette_shift": 16, "scroll": [1, 1]},
         {"image": "286", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [-1, 1]},
         {"image": "291", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":4,"frequency":16}, "palette_shift": 8, "scroll": [0, 1]},
-        {"image": "305", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
-        {"image": "306", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
-        {"image": "107", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
+        {"image": "305", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":4}, "palette_shift": 4, "scroll": [0, 1]},
+        {"image": "306", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 4, "scroll": [0, 1]},
+        {"image": "107", "image_mode": "tiled", "effect":{"type":"vertical","amplitude":2,"frequency":8}, "palette_shift": 4, "scroll": [1, 1]},
         {"image": "098", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
         {"image": "198", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":2,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
         {"image": "195", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]}
@@ -151,9 +150,9 @@
             "layers": [44, 45],
             "speed": 0.5
         },
-        "central_arrows": {
-            "layers": [46, 47],
-            "speed": 1
+        "jews": {
+            "layers": [15, 46],
+            "speed": 0.5
         },
         "central_diamonds": {
             "layers": [48, 49],
