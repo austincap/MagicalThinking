@@ -5496,9 +5496,9 @@ Window_BattleStatus.prototype.drawCurrentAndMax = function(current, max, x, y,
 // Window_BattleLog
 //=============================================================================
 
-Yanfly.BEC.Window_BattleLog_isFastForward =
-    Window_BattleLog.prototype.isFastForward;
+Yanfly.BEC.Window_BattleLog_isFastForward = Window_BattleLog.prototype.isFastForward;
 Window_BattleLog.prototype.isFastForward = function() {
+	console.log("FAST FORWARD");
     if (Yanfly.Param.BECOptSpeed) return true;
     return Yanfly.BEC.Window_BattleLog_isFastForward.call(this);
 };

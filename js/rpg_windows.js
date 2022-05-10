@@ -4739,7 +4739,7 @@ Window_BattleLog.prototype.initialize = function() {
     var width = this.windowWidth();
     var height = this.windowHeight();
     Window_Selectable.prototype.initialize.call(this, 0, 0, width, height);
-    this.opacity = 0;
+    this.opacity = 90;
     this._lines = [];
     this._methods = [];
     this._waitCount = 0;
@@ -4843,6 +4843,7 @@ Window_BattleLog.prototype.callNextMethod = function() {
 };
 
 Window_BattleLog.prototype.isFastForward = function() {
+    console.log("FAST FORWARD");
     return (Input.isLongPressed('ok') || Input.isPressed('shift') ||
             TouchInput.isLongPressed());
 };
