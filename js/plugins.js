@@ -42,5 +42,6 @@ var $plugins =
 {"name":"VE_ControlText","status":false,"description":"v1.00 - Use escape codes everywhere on windowns.","parameters":{"Automatic Text Code":"true\r"}},
 {"name":"YEP_BuffsStatesCore","status":true,"description":"v1.16 Alter the basic mechanics behind buffs and states\nthat aren't adjustable within the RPG Maker editor.","parameters":{"---Turn Indicator---":"","Show Turns":"true","Font Size":"16","Turn Alignment":"right","Turn Buffer X":"-3","Turn Buffer Y":"-6","State Color":"0","Buff Color":"24","Debuff Color":"2","---Enemy Icons---":"","Show Enemy Icons":"true","Enemy Buff Turn":"true","Enemy State Turn":"true","Enemy State Counter":"true","---Buff Settings---":"","Default Limit":"4","Maximum Limit":"8","Buff Formula":"this._buffs[paramId] * 0.25 + 1.0","Show Buff Rate":"false","---State Settings---":"","Reapply Rules":"1","Show Enemy Turns":"true","---Counter Settings---":"","Counter Font Size":"16","Counter Alignment":"center","Counter Buffer X":"0","Counter Buffer Y":"8","Counter Color":"0"}},
 {"name":"MrTS_EnemyPositions","status":true,"description":"Allows to change enemy positions through adding tags.","parameters":{"Spawn Rule":"True"}},
-{"name":"BattleMessageSpeed","status":true,"description":"","parameters":{}}
+{"name":"BattleMessageSpeed","status":true,"description":"","parameters":{}},
+{"name":"Galv_RandEncounterConditions","status":true,"description":"(v.1.2) Have random encounter troops only appear in certain conditions","parameters":{}}
 ];
