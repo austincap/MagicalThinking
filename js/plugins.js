@@ -45,5 +45,6 @@ var $plugins =
 {"name":"BattleMessageSpeed","status":true,"description":"","parameters":{}},
 {"name":"Galv_RandEncounterConditions","status":true,"description":"(v.1.2) Have random encounter troops only appear in certain conditions","parameters":{}},
 {"name":"YEP_HitAccuracy","status":true,"description":"v1.04 This plugin alters the nature of hit accuracy for\nRPG Maker MV by giving control to its formula.","parameters":{"---Formula---":"","Accuracy Formula":"skillHitRate * (userHitRate - targetEvadeRate)","Evade Formula":"0","---User Hit Rate---":"","User Physical Hit":"user.hit","User Magical Hit":"1.00","User Certain Hit":"1.00","---Target Evade Rate---":"","Target Physical Evade":"target.eva","Target Magical Evade":"target.mev","Target Certain Evade":"0.00"}},
-{"name":"ItemCallScript","status":true,"description":"ItemCallScriptPlugin","parameters":{"commandPrefix":""}}
+{"name":"ItemCallScript","status":true,"description":"ItemCallScriptPlugin","parameters":{"commandPrefix":""}},
+{"name":"YEP_ExternalLinks","status":true,"description":"v1.01 Link back to your home page through the title screen\nand also be able to link your players from within the game.","parameters":{"Home Page URL":"https://linktr.ee/magicalthinking","Home Page Text":"Link Tree","Popup Blocker Notice":"The link was blocked by a pop-up blocker."}}
 ];
