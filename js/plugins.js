@@ -44,5 +44,6 @@ var $plugins =
 {"name":"MrTS_EnemyPositions","status":true,"description":"Allows to change enemy positions through adding tags.","parameters":{"Spawn Rule":"True"}},
 {"name":"BattleMessageSpeed","status":true,"description":"","parameters":{}},
 {"name":"Galv_RandEncounterConditions","status":true,"description":"(v.1.2) Have random encounter troops only appear in certain conditions","parameters":{}},
-{"name":"YEP_HitAccuracy","status":true,"description":"v1.04 This plugin alters the nature of hit accuracy for\nRPG Maker MV by giving control to its formula.","parameters":{"---Formula---":"","Accuracy Formula":"skillHitRate * (userHitRate - targetEvadeRate)","Evade Formula":"0","---User Hit Rate---":"","User Physical Hit":"user.hit","User Magical Hit":"1.00","User Certain Hit":"1.00","---Target Evade Rate---":"","Target Physical Evade":"target.eva","Target Magical Evade":"target.mev","Target Certain Evade":"0.00"}}
+{"name":"YEP_HitAccuracy","status":true,"description":"v1.04 This plugin alters the nature of hit accuracy for\nRPG Maker MV by giving control to its formula.","parameters":{"---Formula---":"","Accuracy Formula":"skillHitRate * (userHitRate - targetEvadeRate)","Evade Formula":"0","---User Hit Rate---":"","User Physical Hit":"user.hit","User Magical Hit":"1.00","User Certain Hit":"1.00","---Target Evade Rate---":"","Target Physical Evade":"target.eva","Target Magical Evade":"target.mev","Target Certain Evade":"0.00"}},
+{"name":"ItemCallScript","status":true,"description":"ItemCallScriptPlugin","parameters":{"commandPrefix":""}}
 ];
