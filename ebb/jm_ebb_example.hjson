@@ -48,7 +48,9 @@
         {"image": "198", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":2,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
         {"image": "195", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
         {"image": "298", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":2,"frequency":4}, "palette_shift": 8, "scroll": [0, 1]},
-        {"image": "290", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":4}, "palette_shift": 4, "scroll": [0, 1]}
+        {"image": "290", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":4}, "palette_shift": 4, "scroll": [0, 1]},
+        {"image": "015", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":1}, "palette_shift": 8, "scroll": [0, 1]},
+        {"image": "011", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":1}, "palette_shift": 16, "scroll": [0, 1]}
     ],
     "configurations": {
         "alta": [1, 0],
@@ -163,7 +165,18 @@
         "redstars": {
             "layers": [50, 51],
             "speed": 2
+        },
+        "redblackblue": {
+            "layers": [15, 52],
+            "speed": 1
+        },
+        "irreg_bubbles": {
+            "layers": [8, 53],
+            "speed": 1
+        },
+        "newtest": {
+            "layers": [8, 53],
+            "speed": 1
         }
-
     }
 }
