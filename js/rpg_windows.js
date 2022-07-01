@@ -4844,8 +4844,7 @@ Window_BattleLog.prototype.callNextMethod = function() {
 
 Window_BattleLog.prototype.isFastForward = function() {
     console.log("FAST FORWARD");
-    return (Input.isLongPressed('ok') || Input.isPressed('shift') ||
-            TouchInput.isLongPressed());
+    return (Input.isLongPressed('ok') || Input.isPressed('shift') || TouchInput.isLongPressed());
 };
 
 Window_BattleLog.prototype.push = function(methodName) {
