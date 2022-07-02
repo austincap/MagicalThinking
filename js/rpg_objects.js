@@ -2340,10 +2340,12 @@ Game_BattlerBase.prototype.die = function() {
     this._hp = 0;
     this.clearStates();
     this.clearBuffs();
+    this.addState(this.deathStateId())
 };
 
 Game_BattlerBase.prototype.revive = function() {
-    if (this._hp === 0) {
+    if (this._hp === 0 && this.isDeathStateAffected()) {
+        this.clearStates();
         this._hp = 1;
     }
 };
@@ -2685,14 +2687,12 @@ Game_BattlerBase.prototype.isAlive = function(enemy){
     //return (this.isAppeared() && this._hp > 0);
 };
 
+// Game_BattlerBase.prototype.isAlive = function() {
+//     return this.isAppeared() && !this.isDeathStateAffected();
+// };
+
 Game_BattlerBase.prototype.isDying = function() {
-    //console.log("IS DYING");
-    //return false;
-    // if(this.isAlive()){
-    //     if(this._hp<this.mhp/4){return true;}
-    //     else{return false;}
-    // }else{return false;}
-    return this.isAlive(this) && this._hp < this.mhp / 4;
+    return this.isAlive() && this._hp < this.mhp / 4;
 };
 
 Game_BattlerBase.prototype.isRestricted = function() {
@@ -2741,6 +2741,7 @@ Game_BattlerBase.prototype.restriction = function() {
 };
 
 Game_BattlerBase.prototype.addNewState = function(stateId) {
+    console.log("FUFUIEWFIOJEFIOHJEFIOHJIOHJ");
     if (stateId === this.deathStateId()) {
         this.die();
     }
@@ -3029,14 +3030,24 @@ Game_Battler.prototype.clearResult = function() {
     this._result.clear();
 };
 
+// Game_Battler.prototype.refresh = function() {
+//     Game_BattlerBase.prototype.refresh.call(this);
+//     if (this.hp < 1) {
+//         this.addState(this.deathStateId());
+//     } else {
+//         this.removeState(this.deathStateId());
+//     }
+// };
+
 Game_Battler.prototype.refresh = function() {
     Game_BattlerBase.prototype.refresh.call(this);
-    if (this.hp < 1) {
+    if (this.hp === 0) {
         this.addState(this.deathStateId());
     } else {
         this.removeState(this.deathStateId());
     }
 };
+
 
 Game_Battler.prototype.addState = function(stateId) {
     if (this.isStateAddable(stateId)) {
@@ -4102,8 +4113,11 @@ Game_Actor.prototype.performCounter = function() {
 };
 
 Game_Actor.prototype.performCollapse = function() {
+    console.log("PERFORM COLLAPSE");
+             this.addState(0);
     Game_Battler.prototype.performCollapse.call(this);
     if ($gameParty.inBattle()) {
+
         SoundManager.playActorCollapse();
     }
 };
@@ -4478,6 +4492,7 @@ Game_Enemy.prototype.performDamage = function() {
 
 Game_Enemy.prototype.performCollapse = function() {
     Game_Battler.prototype.performCollapse.call(this);
+
     switch (this.collapseType()) {
     case 0:
         this.requestEffect('collapse');
