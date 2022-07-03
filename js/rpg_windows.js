@@ -4859,35 +4859,6 @@ Window_BattleLog.prototype.clear = function() {
 };
 
 Window_BattleLog.prototype.wait = function() {
-    // document.addEventListener('keypress', function (event) {
-    //   event.preventDefault();
-    //   if (event.keyCode === 13) {
-    //     this._waitCount = 32;
-    //     alert('hi.');
-    //   }
-    // });
-
-    // test();
-    // async function test() {
-    //   console.log('waiting keypress..');
-    //   await waitingKeypress();
-    //   console.log('good job!');
-    //   this._waitCount = 32;
-    // }
-
-    // function waitingKeypress() {
-    //     return new Promise((resolve) => {
-    //     document.addEventListener('keydown', onKeyHandler);
-    //     console.log(document.hasOwnProperty('keydown'));
-    //     function onKeyHandler(e) {
-    //         if (e.keyCode === 13) {
-    //         document.removeEventListener('keydown', onKeyHandler);
-    //             resolve();
-    //         }
-    //     }
-    //   });
-    // }
-
     this._waitCount = this.messageSpeed();
 };
 
@@ -4917,7 +4888,6 @@ Window_BattleLog.prototype.popBaseLine = function() {
 };
 
 Window_BattleLog.prototype.waitForNewLine = function() {
-    console.log("WAITFORNEWLINE");
     var baseLine = 0;
     if (this._baseLineStack.length > 0) {
         baseLine = this._baseLineStack[this._baseLineStack.length - 1];

@@ -2377,7 +2377,6 @@ Scene_Battle.prototype.createAllWindows = function() {
 Scene_Battle.prototype.createLogWindow = function() {
     this._logWindow = new Window_BattleLog();
     this.addWindow(this._logWindow);
-    console.log("LOG WINDOW");
 };
 
 Scene_Battle.prototype.createStatusWindow = function() {
@@ -2450,7 +2449,6 @@ Scene_Battle.prototype.createMessageWindow = function() {
     this._messageWindow.subWindows().forEach(function(window) {
         this.addWindow(window);
     }, this);
-    console.log("MESSAGE WINDOW");
 };
 
 Scene_Battle.prototype.createScrollTextWindow = function() {
