@@ -1673,16 +1673,16 @@ Game_Action.prototype.apply = function(target) {
     result.physical = this.isPhysical();
     result.drain = this.isDrain();
     if (result.isHit()) {
+        console.log("GAME ACTION APPLY IS HIT")
         if (this.item().damage.type > 0) {
+            console.log("GAME ACTION APPLY OBJECTS DAMASGE TYPE > 0")
             result.critical = (Math.random() < this.itemCri(target));
             var value = this.makeDamageValue(target, result.critical);
             this.executeDamage(target, value);
         }
-        this.item().effects.forEach(function(effect) {
-            this.applyItemEffect(target, effect);
-        }, this);
+        this.item().effects.forEach( function(effect){this.applyItemEffect(target,effect);}, this);
         this.applyItemUserEffect(target);
-    }
+    }else{ console.log("GAME ACTION APPLY NOT HIT")}
 };
 
 Game_Action.prototype.makeDamageValue = function(target, critical) {

@@ -1134,6 +1134,7 @@ Game_Action.prototype.applyAfterEval = function(target) {
 
 Yanfly.Skill.Game_Action_executeDamage = Game_Action.prototype.executeDamage;
 Game_Action.prototype.executeDamage = function(target, value) {
+	console.log("EXECUTE DAMAGE GAME ACTION YEP SKILL CORE")
     this.applyPreDamageEffect(target, value);
     value = this.applyPreDamageEval(target, value);
     Yanfly.Skill.Game_Action_executeDamage.call(this, target, value);
@@ -1186,6 +1187,7 @@ Game_Action.prototype.applyPostDamageEval = function(target, value) {
 
 Yanfly.Skill.Window_Base_drawActorHp = Window_Base.prototype.drawActorHp;
 Window_Base.prototype.drawActorHp = function(actor, x, y, width) {
+	console.log("WINDOW BASE DRAW ACTOR HP SKILL CORE")
     if (actor.gauge1() === 'HP') {
       Yanfly.Skill.Window_Base_drawActorHp.call(this, actor, x, y, width);
     } else if (actor.gauge1() === 'MP') {
