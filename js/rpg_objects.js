@@ -2673,6 +2673,8 @@ Game_BattlerBase.prototype.isAppeared = function() {
 };
 
 Game_BattlerBase.prototype.isDead = function(){
+    console.log("IS DEAD?");
+    console.log(this.isAppeared() && this.isDeathStateAffected());
     return this.isAppeared() && this.isDeathStateAffected();
 };
 
@@ -2680,7 +2682,7 @@ Game_BattlerBase.prototype.isAlive = function(enemy){
     //console.log("IS ALIVE?");
     if(enemy==undefined){return true;}
     if(enemy.isAppeared()){
-        // if(this._hp>0){console.log("yes"); return true;}this.addNewState(1);
+        //if(this._hp>0){console.log("yes"); return true;}this.addNewState(1);
         if(enemy._hp>0){return true;}
         else{console.log("no");console.log(enemy);return false;}
     }else{return false;}
@@ -2688,6 +2690,8 @@ Game_BattlerBase.prototype.isAlive = function(enemy){
 };
 
 // Game_BattlerBase.prototype.isAlive = function() {
+//     console.log("IS ALIVE?");
+//     console.log(this.isAppeared() && !this.isDeathStateAffected());
 //     return this.isAppeared() && !this.isDeathStateAffected();
 // };
 
@@ -3030,18 +3034,9 @@ Game_Battler.prototype.clearResult = function() {
     this._result.clear();
 };
 
-// Game_Battler.prototype.refresh = function() {
-//     Game_BattlerBase.prototype.refresh.call(this);
-//     if (this.hp < 1) {
-//         this.addState(this.deathStateId());
-//     } else {
-//         this.removeState(this.deathStateId());
-//     }
-// };
-
 Game_Battler.prototype.refresh = function() {
     Game_BattlerBase.prototype.refresh.call(this);
-    if (this.hp === 0) {
+    if (this.hp < 1) {
         this.addState(this.deathStateId());
     } else {
         this.removeState(this.deathStateId());
@@ -3049,9 +3044,13 @@ Game_Battler.prototype.refresh = function() {
 };
 
 
+
+
 Game_Battler.prototype.addState = function(stateId) {
     if (this.isStateAddable(stateId)) {
+        console.log("IT IS ADDABLE");
         if (!this.isStateAffected(stateId)) {
+            console.log("IS NOT STATE AFFECTED");
             this.addNewState(stateId);
             this.refresh();
         }
@@ -3061,8 +3060,11 @@ Game_Battler.prototype.addState = function(stateId) {
 };
 
 Game_Battler.prototype.isStateAddable = function(stateId) {
-    //console.log("IS STATE ADDABLE?");
-    //console.log(stateId);
+    console.log("IS STATE ADDABLE?");
+    console.log(stateId);
+    console.log(this.isAlive(this) && $dataStates[stateId] && !this.isStateResist(stateId) && !this._result.isStateRemoved(stateId) && !this.isStateRestrict(stateId));
+    console.log(this.isAlive(this));
+    console.log(!this.isStateRestrict(stateId));
     return (this.isAlive(this) && $dataStates[stateId] && !this.isStateResist(stateId) && !this._result.isStateRemoved(stateId) && !this.isStateRestrict(stateId));
 };
 
@@ -3807,6 +3809,7 @@ Game_Actor.prototype.isActor = function() {
     return true;
 };
 
+
 Game_Actor.prototype.friendsUnit = function() {
     return $gameParty;
 };
@@ -4092,7 +4095,7 @@ Game_Actor.prototype.performDamage = function() {
     if (this.isSpriteVisible()) {
         this.requestMotion('damage');
     } else {
-        $gameScreen.startShake(5, 5, 10);
+        $gameScreen.startShake(10, 10, 10);
     }
     SoundManager.playActorDamage();
 };
@@ -4114,10 +4117,9 @@ Game_Actor.prototype.performCounter = function() {
 
 Game_Actor.prototype.performCollapse = function() {
     console.log("PERFORM COLLAPSE");
-             this.addState(0);
+    this.addState(1);
     Game_Battler.prototype.performCollapse.call(this);
     if ($gameParty.inBattle()) {
-
         SoundManager.playActorCollapse();
     }
 };
@@ -9154,7 +9156,8 @@ Game_Interpreter.prototype.operateValue = function(operation, operandType, opera
 };
 
 Game_Interpreter.prototype.changeHp = function(target, value, allowDeath) {
-    //console.log("CHANGE HP");
+    console.log("CHANGE HP");
+    console.log(allowDeath);
     if (target.isAlive(target)) {
         if (!allowDeath && target.hp <= -value) {
             value = 1 - target.hp;
@@ -10346,7 +10349,8 @@ Game_Interpreter.prototype.command313 = function() {
         } else {
             actor.removeState(this._params[3]);
         }
-        if (actor.isDead() && !alreadyDead) {
+        //if (actor.isDead() && !alreadyDead) {
+        if (actor._hp < 1) {
             actor.performCollapse();
         }
         actor.clearResult();

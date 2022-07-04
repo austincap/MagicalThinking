@@ -5480,8 +5480,7 @@ Window_BattleStatus.prototype.update = function() {
 
 if (!Yanfly.Param.BECCurMax) {
 
-Window_BattleStatus.prototype.drawCurrentAndMax = function(current, max, x, y,
-                                                   width, color1, color2) {
+Window_BattleStatus.prototype.drawCurrentAndMax = function(current, max, x, y, width, color1, color2) {
     var labelWidth = this.textWidth('HP');
     var valueWidth = this.textWidth(Yanfly.Util.toGroup(max));
     var slashWidth = this.textWidth('/');
@@ -5598,6 +5597,7 @@ Window_BattleLog.prototype.displayActionResults = function(subject, target) {
     } else {
       Yanfly.BEC.Window_BattleLog_displayActionResults.call(this, subject, target);
     }
+    console.log("BATTLELOG WINDO DISPLAY ACTION REWSLSED")
     if (target.isDead()) target.performCollapse();
 };
 
