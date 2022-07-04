@@ -1586,13 +1586,14 @@ Game_Actor.prototype.learnSkill = function(skillId) {
 if (Utils.RPGMAKER_VERSION && Utils.RPGMAKER_VERSION >= '1.3.4') {
 
 Game_Actor.prototype.meetsUsableItemConditions = function(item) {
-  if($gameParty.inBattle() && !BattleManager.canEscape() && this.testEscape(item)){
+  if($gameParty.inBattle() && !BattleManager.canEscape() &&
+  this.testEscape(item)){
     return false;
   }
   return Game_BattlerBase.prototype.meetsUsableItemConditions.call(this, item);
 };
 
-};
+}; // Utils.RPGMAKER_VERSION && Utils.RPGMAKER_VERSION >= '1.3.4'
 
 //=============================================================================
 // Game_Party
@@ -2431,8 +2432,8 @@ Window_Base.prototype.drawActorLevel = function(actor, x, y) {
     this.drawText(level, x + dw1, y, dw2, 'right');
 };
 
-Window_Base.prototype.drawCurrentAndMax = function(current, max, x, y, width, color1, color2) {
-	console.log("WINDOW BASE draw CURRENT AND MAX CORE ENGINE");
+Window_Base.prototype.drawCurrentAndMax = function(current, max, x, y,
+                                                   width, color1, color2) {
     var labelWidth = this.textWidth('HP');
     var valueWidth = this.textWidth(Yanfly.Util.toGroup(max));
     var slashWidth = this.textWidth('/');

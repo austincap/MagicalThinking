@@ -211,8 +211,7 @@ Yanfly.Param.STBEscapeBoost = String(Yanfly.Parameters['Fail Escape Boost']);
 
 Yanfly.Param.STBShowWindow = String(Yanfly.Parameters['Show Turn Window']);
 Yanfly.Param.STBShowWindow = eval(Yanfly.Param.STBShowWindow);
-//Yanfly.Param.STBWindowX = String(Yanfly.Parameters['Turn Window X']);
-Yanfly.Param.STBWindowX = String(3000);
+Yanfly.Param.STBWindowX = String(Yanfly.Parameters['Turn Window X']);
 Yanfly.Param.STBWindowY = String(Yanfly.Parameters['Turn Window Y']);
 Yanfly.Param.STBWindowW = String(Yanfly.Parameters['Turn Window Width']);
 Yanfly.Param.STBWindowH = String(Yanfly.Parameters['Turn Window Height']);
@@ -337,7 +336,8 @@ BattleManager.startSTBInput = function() {
   }
 };
 
-Yanfly.STB.BattleManager_selectPreviousCommand = BattleManager.selectPreviousCommand;
+Yanfly.STB.BattleManager_selectPreviousCommand =
+  BattleManager.selectPreviousCommand;
 BattleManager.selectPreviousCommand = function() {
   if (this.isSTB()) {
     this._activeSTBActor = this._actorIndex;
@@ -348,7 +348,8 @@ BattleManager.selectPreviousCommand = function() {
   }
 };
 
-Yanfly.STB.BattleManager_displayEscapeFailureMessage = BattleManager.displayEscapeFailureMessage;
+Yanfly.STB.BattleManager_displayEscapeFailureMessage =
+  BattleManager.displayEscapeFailureMessage;
 BattleManager.displayEscapeFailureMessage = function() {
   Yanfly.STB.BattleManager_displayEscapeFailureMessage.call(this);
   if (this.isSTB()) {
@@ -453,7 +454,8 @@ Game_Action.prototype.speed = function() {
 // Scene_Battle
 //=============================================================================
 
-Yanfly.STB.Scene_Battle_createHelpWindow = Scene_Battle.prototype.createHelpWindow;
+Yanfly.STB.Scene_Battle_createHelpWindow =
+  Scene_Battle.prototype.createHelpWindow;
 Scene_Battle.prototype.createHelpWindow = function() {
   if (BattleManager.isSTB()) this.createSTBTurnOrderWindow();
   Yanfly.STB.Scene_Battle_createHelpWindow.call(this);
@@ -492,34 +494,35 @@ Scene_Battle.prototype.commandEscape = function() {
 
 if (Yanfly.Param.STBDelayStatus) {
 
-  Yanfly.STB.Scene_Battle_updateWindowPositions = Scene_Battle.prototype.updateWindowPositions;
-  Scene_Battle.prototype.updateWindowPositions = function() {
-      if (BattleManager.isSTB()) return this.updateWindowPositionsSTB();
-      Yanfly.STB.Scene_Battle_updateWindowPositions.call(this);
-  };
+Yanfly.STB.Scene_Battle_updateWindowPositions =
+    Scene_Battle.prototype.updateWindowPositions;
+Scene_Battle.prototype.updateWindowPositions = function() {
+    if (BattleManager.isSTB()) return this.updateWindowPositionsSTB();
+    Yanfly.STB.Scene_Battle_updateWindowPositions.call(this);
+};
 
-  Scene_Battle.prototype.updateWindowPositionsSTB = function() {
-    if (this._STBWindowPosCount === undefined) this._STBWindowPosCount = 0;
-    if (this._partyCommandWindow.active) {
-      this._STBWindowPosCount = 16;
-      var statusX = 0;
-      statusX = this._partyCommandWindow.width;
-      if (this._statusWindow.x < statusX) {
-        this._statusWindow.x += 16;
-        if (this._statusWindow.x > statusX) this._statusWindow.x = statusX;
-      }
-      if (this._statusWindow.x > statusX) {
-        this._statusWindow.x -= 16;
-        if (this._statusWindow.x < statusX) this._statusWindow.x = statusX;
-      }
-    } else if (this._actorCommandWindow.active) {
-      this._STBWindowPosCount = 16;
-      Yanfly.STB.Scene_Battle_updateWindowPositions.call(this);
-    } else {
-      if (--this._STBWindowPosCount > 0) return;
-      Yanfly.STB.Scene_Battle_updateWindowPositions.call(this);
+Scene_Battle.prototype.updateWindowPositionsSTB = function() {
+  if (this._STBWindowPosCount === undefined) this._STBWindowPosCount = 0;
+  if (this._partyCommandWindow.active) {
+    this._STBWindowPosCount = 16;
+    var statusX = 0;
+    statusX = this._partyCommandWindow.width;
+    if (this._statusWindow.x < statusX) {
+      this._statusWindow.x += 16;
+      if (this._statusWindow.x > statusX) this._statusWindow.x = statusX;
     }
-  };
+    if (this._statusWindow.x > statusX) {
+      this._statusWindow.x -= 16;
+      if (this._statusWindow.x < statusX) this._statusWindow.x = statusX;
+    }
+  } else if (this._actorCommandWindow.active) {
+    this._STBWindowPosCount = 16;
+    Yanfly.STB.Scene_Battle_updateWindowPositions.call(this);
+  } else {
+    if (--this._STBWindowPosCount > 0) return;
+    Yanfly.STB.Scene_Battle_updateWindowPositions.call(this);
+  }
+};
 
 }; // Yanfly.Param.STBDelayStatus
 

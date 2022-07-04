@@ -1642,10 +1642,6 @@ BattleManager.isBattleSystem = function(value) {
     return value.toLowerCase() === $gameSystem.getBattleSystem();
 };
 
-BattleManager.refresh = function(){
-	Game_Actor.refresh();
-};
-
 BattleManager.isDTB = function() {
     return this.isBattleSystem('dtb');
 };
@@ -1793,42 +1789,29 @@ BattleManager.clearInputtingAction = function() {
 
 Yanfly.BEC.BattleManager_checkBattleEnd = BattleManager.checkBattleEnd;
 BattleManager.checkBattleEnd = function() {
-	//console.log("YANFLYCHECKBATTLEND");
-    //console.log("CHECKDEAD");
-    //console.log($gameTroop._enemies);
-    //console.log($gameTroop.isAllDead($gameTroop._enemies));
-    //console.log($gameParty.isAllDead());
-    //this._phase === 'phaseChange';
-    if (this.checkAbort()){
-        return true;
-    }
     if ($gameParty.isAllDead()){
+    	console.log("PARTY GOT DEFEATED");
         this.processDefeat();
         return true;
     }else if($gameParty.isAllCalm()){
-    	console.log("PUSSY OUT");
-    	this.processTalkDefeat();
-    	return true;
+        console.log("LOST WILL TO FIGHT");
+        this.processTalkDefeat();
+        return true;
     }else if ($gameTroop.isAllDead($gameTroop._enemies)){
+    	console.log("DEFEATED ALL ENEMIES");
         this.processVictory($gameTroop);
         return true;
-    }
-    else if ($gameTroop.isAllCalm($gameTroop._enemies)){
+	}else if ($gameTroop.isAllCalm($gameTroop._enemies)){
+		console.log("TALK VICTORY");
         this.processTalkVictory($gameTroop);
         return true;
-    }else{
-	    if (this._phase === 'actionList') return false;
-	    if (this._phase === 'actionTargetList') return false;
-	    if (this._phase === 'action') return false;
-	    if (this._phase === 'phaseChange') return false;
-	    if (this._phase === 'turn') return false;
-	    if ($gameTroop.isEventRunning()){
-	    	console.log("EVENT IS RUNNING");
-	    	return false;
-	    }
     }
-    this.endTurn();
-    //return Yanfly.BEC.BattleManager_checkBattleEnd.call(this);
+    if (this._phase === 'actionList') return false;
+    if (this._phase === 'actionTargetList') return false;
+    if (this._phase === 'action') return false;
+    if (this._phase === 'phaseChange') return false;
+    if ($gameTroop.isEventRunning()) return false;
+    return Yanfly.BEC.BattleManager_checkBattleEnd.call(this);
 };
 
 Yanfly.BEC.BattleManager_processTurn = BattleManager.processTurn;
@@ -1839,61 +1822,17 @@ BattleManager.processTurn = function() {
 };
 
 Yanfly.BEC.BattleManager_processVictory = BattleManager.processVictory;
-BattleManager.processVictory = function(gameTroop){
-	this._phase = 'aborting';
+BattleManager.processVictory = function() {
     this._logWindow.clear();
     this._victoryPhase = true;
     if (this._windowLayer) this._windowLayer.x = 0;
-	this._phase = 'aborting';
-	console.log("VIOLENCE VICTORY");
-    $gameParty.removeBattleStates();
-    $gameParty.performVictory();
-    this.playVictoryMe();
-    this.replayBgmAndBgs();
-    //this.makeRewards();
-    this._rewards = {};
-    console.log("REWARDS");
-    // console.log(gameTroop);
-    // console.log(gameTroop.enemyNames());
-    // console.log($gameTroop._enemies[0].gold);
-    //var gold = gameTroop.goldTotal();
-    //var exp = gameTroop.expTotal();
-    //var items = gameTroop.makeDropItems();
-    //console.log(gold);
-    // if (exp > 0){
-    //     var text = TextManager.obtainExp.format(exp, TextManager.exp);
-    //     $gameMessage.add('\\.' + text);
-    // } 
-    // if (gold > 0){
-    //     $gameMessage.add('\\.' + TextManager.obtainGold.format(gold));
-    // }
-    // if (items.length > 0){
-    //     $gameMessage.newPage();
-    //     items.forEach(function(item){
-    //         $gameMessage.add(TextManager.obtainItem.format(item.name));
-    //     });
-    // }
-    // $gameParty.allMembers().forEach(function(actor){
-    //     actor.gainExp(exp);
-    // });
-    // $gameParty.gainGold(this._rewards.gold);
-    // items.forEach(function(item){
-    //     $gameParty.gainItem(item, 1);
-    // });
-    // this.displayExp();
-    // this.displayGold();
-    // this.displayDropItems();
-    // this.displayRewards();
-    //this.gainRewards();
-    this.displayVictoryMessage();
-    this.endBattle(0);
+    Yanfly.BEC.BattleManager_processVictory.call(this);
 };
-
 
 Yanfly.BEC.BattleManager_processTalkVictory = BattleManager.processTalkVictory;
 BattleManager.processTalkVictory = function(gameTroop) {
+	this._phase = 'aborting';
     this._victoryPhase = true;
-    this._phase = 'aborting';
     $gameTemp.reserveCommonEvent(1);
     console.log("TALK VICTORY");
     $gameParty.removeBattleStates();
@@ -1903,21 +1842,21 @@ BattleManager.processTalkVictory = function(gameTroop) {
     this.displayTalkVictoryMessage();
     this.endBattle(5);
 };
-Yanfly.BEC.BattleManager_processDefeat = BattleManager.processDefeat;
-BattleManager.processDefeat = function() {
-	console.log("DEFEAT");
-    this.displayDefeatMessage();
-    this.playDefeatMe();
-    if (this._canLose) {
-        this.replayBgmAndBgs();
-    } else {
-        AudioManager.stopBgm();
-    }
-    this.endBattle(2);
-};
-Yanfly.BEC.BattleManager_processTalkDefeat = BattleManager.processTalkDefeat;
+
+
+// BattleManager.processDefeat = function() {
+//     this.displayDefeatMessage();
+//     this.playDefeatMe();
+//     if (this._canLose) {
+//         this.replayBgmAndBgs();
+//     } else {
+//         AudioManager.stopBgm();
+//     }
+//     this.endBattle(2);
+// };
+	
+
 BattleManager.processTalkDefeat = function() {
-	console.log("TALKDEFEAT");
     this.displayTalkDefeatMessage();
     this.playDefeatMe();
     if (this._canLose) {
@@ -1925,60 +1864,27 @@ BattleManager.processTalkDefeat = function() {
     } else {
         AudioManager.stopBgm();
     }
-    this.endBattle(3);
-};
+    this.endBattle(2);
+}; 
 
-BattleManager.endBattle = function(result) {
-    this._phase = 'battleEnd';
-    if (this._eventCallback) {
-        this._eventCallback(result);
-    }
-    if (result === 0) {
-        $gameSystem.onBattleWin();
-    } else if (result === 5) {
-        $gameSystem.onTalkWin();
-    } else if (this._escaped) {
-        $gameSystem.onBattleEscape();
-    } else if (result === 3) {
-    	$gameSystem.onTalkDefeat();
-    }
-};
-
-BattleManager.updateBattleEnd = function() {
-    if (this.isBattleTest()) {
-        AudioManager.stopBgm();
-        SceneManager.exit();
-    } else if (!this._escaped && $gameParty.isAllDead()) {
-        if (this._canLose) {
-            $gameParty.reviveBattleMembers();
-            SceneManager.pop();
-        } else {
-            SceneManager.goto(Scene_Gameover);
-        }
+BattleManager.processEscape = function() {
+    $gameParty.performEscape();
+    SoundManager.playEscape();
+    var success = this._preemptive ? true : (Math.random() < this._escapeRatio);
+    if ($gamePlayer.isDebugThrough()) success = true;
+    if (success) {
+        $gameParty.performEscapeSuccess();
+        this.displayEscapeSuccessMessage();
+        this._escaped = true;
+        this.processAbort();
     } else {
-        SceneManager.pop();
+        this.displayEscapeFailureMessage();
+        this._escapeRatio += this._escapeFailBoost;
+        $gameParty.clearActions();
+        this.startTurn();
     }
-    this._phase = null;
+    return success;
 };
-
-// BattleManager.processEscape = function() {
-//     $gameParty.performEscape();
-//     SoundManager.playEscape();
-//     var success = this._preemptive ? true : (Math.random() < this._escapeRatio);
-//     if ($gamePlayer.isDebugThrough()) success = true;
-//     if (success) {
-//         $gameParty.performEscapeSuccess();
-//         this.displayEscapeSuccessMessage();
-//         this._escaped = true;
-//         this.processAbort();
-//     } else {
-//         this.displayEscapeFailureMessage();
-//         this._escapeRatio += this._escapeFailBoost;
-//         $gameParty.clearActions();
-//         this.startTurn();
-//     }
-//     return success;
-// };
 
 Yanfly.BEC.BattleManager_processAbort = BattleManager.processAbort;
 BattleManager.processAbort = function() {
@@ -2007,11 +1913,7 @@ BattleManager.startTurn = function() {
 
 Yanfly.BEC.BattleManager_endTurn = BattleManager.endTurn;
 BattleManager.endTurn = function() {
-	console.log('END TURN');
-    if (this.isTurnBased() && this._spriteset.isPopupPlaying()){
-    	//this._phase = 'turnEnd';
-    	return;
-    }
+    if (this.isTurnBased() && this._spriteset.isPopupPlaying()) return;
     if (this.isTurnBased() && this._enteredEndPhase) {
       this._phase = 'turnEnd';
       this._preemptive = false;
@@ -3050,7 +2952,6 @@ Sprite_Battler.prototype.preSpriteInitialize = function(battler) {
 
 Yanfly.BEC.Sprite_Battler_update = Sprite_Battler.prototype.update;
 Sprite_Battler.prototype.update = function() {
-	//console.log("BATTLER UPDATE");
     Yanfly.BEC.Sprite_Battler_update.call(this);
     if (this._postSpriteInitialized) return;
     this.postSpriteInitialize();
@@ -3103,7 +3004,6 @@ Sprite_Battler.prototype.pushDamageSprite = function(sprite) {
         }
       }, this);
     } else {
-      console.log(this._damages);
       this._damages.push(sprite);
       heightBuffer *= this._damages.length
       for (var i = 0; i < sprite.children.length; i++) {
@@ -3661,7 +3561,6 @@ Game_Action.prototype.speed = function() {
 
 Yanfly.BEC.Game_Action_apply = Game_Action.prototype.apply;
 Game_Action.prototype.apply = function(target) {
-	console.log("YEP BATTLEENGINE APPLY");
     target._result = null;
     target._result = new Game_ActionResult();
     this.subject()._result = null;
@@ -3976,7 +3875,6 @@ Game_Battler.prototype.performResultEffects = function() {
     if (result.hpAffected) {
       if (result.hpDamage > 0 && !result.drain) {
         this.performDamage();
-        //this.forceMotionRefresh();
       }
       if (result.hpDamage < 0) {
         this.performRecovery();
@@ -3988,13 +3886,10 @@ Game_Battler.prototype.performResultEffects = function() {
     if (this.isAlive() && result.tpDamage !== 0 && result.tpDamage < 0) {
       this.performRecovery();
     }
-    // if (this.isDead()){
-    // 	console.log("RESULT");
-    // 	console.log(result);
-    // }
 };
 
-Yanfly.BEC.Game_Battler_performDamage = Game_Battler.prototype.performDamage;
+Yanfly.BEC.Game_Battler_performDamage =
+  Game_Battler.prototype.performDamage;
 Game_Battler.prototype.performDamage = function() {
     Yanfly.BEC.Game_Battler_performDamage.call(this);
     this.performFlinch();
@@ -4006,13 +3901,15 @@ Game_Battler.prototype.performMiss = function() {
     this.performFlinch();
 };
 
-Yanfly.BEC.Game_Battler_performEvasion = Game_Battler.prototype.performEvasion;
+Yanfly.BEC.Game_Battler_performEvasion =
+    Game_Battler.prototype.performEvasion;
 Game_Battler.prototype.performEvasion = function() {
     Yanfly.BEC.Game_Battler_performEvasion.call(this);
     this.performFlinch();
 };
 
-Yanfly.BEC.Game_Battler_performMagicEvasion = Game_Battler.prototype.performMagicEvasion;
+Yanfly.BEC.Game_Battler_performMagicEvasion =
+    Game_Battler.prototype.performMagicEvasion;
 Game_Battler.prototype.performMagicEvasion = function() {
     Yanfly.BEC.Game_Battler_performMagicEvasion.call(this);
     this.performFlinch();
@@ -4024,7 +3921,8 @@ Game_Battler.prototype.performFlinch = function() {
     this.spriteStepFlinch();
 };
 
-Yanfly.BEC.Game_Battler_performReflection = Game_Battler.prototype.performReflection;
+Yanfly.BEC.Game_Battler_performReflection =
+    Game_Battler.prototype.performReflection;
 Game_Battler.prototype.performReflection = function() {
     Yanfly.BEC.Game_Battler_performReflection.call(this);
     if (!$gameSystem.isSideView() && this.isActor()) return;
@@ -4033,7 +3931,8 @@ Game_Battler.prototype.performReflection = function() {
     this.startAnimation(animationId, mirror, 0);
 };
 
-Yanfly.BEC.Game_Battler_performSubstitute = Game_Battler.prototype.performSubstitute;
+Yanfly.BEC.Game_Battler_performSubstitute =
+    Game_Battler.prototype.performSubstitute;
 Game_Battler.prototype.performSubstitute = function(target) {
     Yanfly.BEC.Game_Battler_performSubstitute.call(this, target);
     if (!$gameSystem.isSideView()) return;
@@ -4083,7 +3982,8 @@ Game_Battler.prototype.performActionStart = function(action) {
     }
 };
 
-Yanfly.BEC.Game_Battler_performActionEnd = Game_Battler.prototype.performActionEnd;
+Yanfly.BEC.Game_Battler_performActionEnd =
+    Game_Battler.prototype.performActionEnd;
 Game_Battler.prototype.performActionEnd = function() {
     Yanfly.BEC.Game_Battler_performActionEnd.call(this);
     this.spriteReturnHome();
@@ -4287,11 +4187,12 @@ Game_Battler.prototype.requestMotionRefresh = function() {
     }
     if (this.isDead() && this._motionType === deadMotion) return;
     if (this._motionType === 'victory') return;
-    if (this._motionType === 'aborting') return;
     if (this._motionType === 'escape' && !BattleManager.isInputting()) return;
     if (this._motionType === 'guard' && !BattleManager.isInputting()) return;
     this.clearMotion();
-    if (this.battler() && BattleManager.isInputting()) { this.battler().refreshMotion(); }
+    if (this.battler() && BattleManager.isInputting()) {
+      this.battler().refreshMotion();
+    }
 };
 
 Game_Battler.prototype.onTurnStart = function() {
@@ -4668,7 +4569,6 @@ Game_Unit.prototype.updateTick = function() {
 };
 
 Game_Unit.prototype.refreshMembers = function() {
-	console.log("GAME UNIT REFRESH MEMBERS BATTLE ENGINGE CORE")
     var group = this.allMembers();
     var length = group.length;
     for (var i = 0; i < length; ++i) {
@@ -4707,7 +4607,6 @@ Scene_Battle.prototype.update = function() {
 };
 
 Scene_Battle.prototype.updateStatusWindowRequests = function() {
-	//console.log(this);
     if (!this._statusWindow) return;
     if (this._statusWindow.isClosed()) return;
     this._statusWindow.updateStatusRequests();
@@ -5481,7 +5380,8 @@ Window_BattleStatus.prototype.update = function() {
 
 if (!Yanfly.Param.BECCurMax) {
 
-Window_BattleStatus.prototype.drawCurrentAndMax = function(current, max, x, y, width, color1, color2) {
+Window_BattleStatus.prototype.drawCurrentAndMax = function(current, max, x, y,
+                                                   width, color1, color2) {
     var labelWidth = this.textWidth('HP');
     var valueWidth = this.textWidth(Yanfly.Util.toGroup(max));
     var slashWidth = this.textWidth('/');
@@ -5496,9 +5396,9 @@ Window_BattleStatus.prototype.drawCurrentAndMax = function(current, max, x, y, w
 // Window_BattleLog
 //=============================================================================
 
-Yanfly.BEC.Window_BattleLog_isFastForward = Window_BattleLog.prototype.isFastForward;
+Yanfly.BEC.Window_BattleLog_isFastForward =
+    Window_BattleLog.prototype.isFastForward;
 Window_BattleLog.prototype.isFastForward = function() {
-	console.log("FAST FORWARD");
     if (Yanfly.Param.BECOptSpeed) return true;
     return Yanfly.BEC.Window_BattleLog_isFastForward.call(this);
 };
@@ -5562,7 +5462,8 @@ Window_BattleLog.prototype.waitForPopups = function() {
     this.setWaitMode('popups');
 };
 
-Yanfly.BEC.Window_BattleLog_displayAction = Window_BattleLog.prototype.displayAction;
+Yanfly.BEC.Window_BattleLog_displayAction =
+    Window_BattleLog.prototype.displayAction;
 Window_BattleLog.prototype.displayAction = function(subject, item) {
     if (Yanfly.Param.BECFullActText) {
       Yanfly.BEC.Window_BattleLog_displayAction.call(this, subject, item);
@@ -5586,7 +5487,8 @@ Window_BattleLog.prototype.displayText = function(item) {
     return item.battleDisplayText;
 };
 
-Yanfly.BEC.Window_BattleLog_displayActionResults = Window_BattleLog.prototype.displayActionResults;
+Yanfly.BEC.Window_BattleLog_displayActionResults =
+    Window_BattleLog.prototype.displayActionResults;
 Window_BattleLog.prototype.displayActionResults = function(subject, target) {
     if (Yanfly.Param.BECOptSpeed) {
       if (target.result().used) {
@@ -5596,9 +5498,9 @@ Window_BattleLog.prototype.displayActionResults = function(subject, target) {
           this.displayFailure(target);
       }
     } else {
-      Yanfly.BEC.Window_BattleLog_displayActionResults.call(this, subject, target);
+      Yanfly.BEC.Window_BattleLog_displayActionResults.call(this, subject,
+          target);
     }
-    console.log("BATTLELOG WINDO DISPLAY ACTION REWSLSED")
     if (target.isDead()) target.performCollapse();
 };
 

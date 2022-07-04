@@ -76,7 +76,7 @@ Game_System.prototype.initialize = function() {
     this._formationEnabled = true;
     this._battleCount = 0;
     this._winCount = 0;
-    this._talkWinCount = 0;
+    this._talkWinCount = 0; 
     this._escapeCount = 0;
     this._saveCount = 0;
     this._versionId = 0;
@@ -89,7 +89,7 @@ Game_System.prototype.initialize = function() {
     this._defeatMe = null;
     this._savedBgm = null;
     this._walkingBgm = null;
-    this._talkVictoryMe = {name: "Musical3", volume: 90, pitch: 100, pan: 0};
+    this._talkVictoryMe = {name: "Musical3", volume: 90, pitch: 100, pan: 0}; 
 };
 
 Game_System.prototype.isJapanese = function() {
@@ -174,7 +174,7 @@ Game_System.prototype.winCount = function() {
 
 Game_System.prototype.talkWinCount = function() {
     return this._talkWinCount;
-};
+}; 
 
 Game_System.prototype.escapeCount = function() {
     return this._escapeCount;
@@ -210,10 +210,9 @@ Game_System.prototype.victoryMe = function() {
 
 Game_System.prototype.talkVictoryMe = function() {
     return this._talkVictoryMe || $dataSystem.talkVictoryMe;
-};
+}; 
 
 Game_System.prototype.setVictoryMe = function(value) {
-    //console.log(value);
     this._victoryMe = value;
 };
 
@@ -235,13 +234,13 @@ Game_System.prototype.onBattleWin = function() {
 
 Game_System.prototype.onTalkWin = function() {
     this._talkWinCount++;
-};
+}; 
 
 Game_System.prototype.onBattleEscape = function() {
     this._escapeCount++;
 };
 
-Game_System.prototype.onTalkDefeat = function() {
+Game_System.prototype.onTalkDefeat = function(){
     console.log("talk defeat");
 };
 
@@ -1663,7 +1662,6 @@ Game_Action.prototype.itemCri = function(target) {
 };
 
 Game_Action.prototype.apply = function(target) {
-    console.log("APPLY IN RPG OBJECT>JS");
     var result = target.result();
     this.subject().clearResult();
     result.clear();
@@ -1673,16 +1671,16 @@ Game_Action.prototype.apply = function(target) {
     result.physical = this.isPhysical();
     result.drain = this.isDrain();
     if (result.isHit()) {
-        console.log("GAME ACTION APPLY IS HIT")
         if (this.item().damage.type > 0) {
-            console.log("GAME ACTION APPLY OBJECTS DAMASGE TYPE > 0")
             result.critical = (Math.random() < this.itemCri(target));
             var value = this.makeDamageValue(target, result.critical);
             this.executeDamage(target, value);
         }
-        this.item().effects.forEach( function(effect){this.applyItemEffect(target,effect);}, this);
+        this.item().effects.forEach(function(effect) {
+            this.applyItemEffect(target, effect);
+        }, this);
         this.applyItemUserEffect(target);
-    }else{ console.log("GAME ACTION APPLY NOT HIT")}
+    }
 };
 
 Game_Action.prototype.makeDamageValue = function(target, critical) {
@@ -1755,7 +1753,6 @@ Game_Action.prototype.applyGuard = function(damage, target) {
 };
 
 Game_Action.prototype.executeDamage = function(target, value) {
-    console.log("GAMME ACTION EXECUTE DAMAGE OBJECTS");
     var result = target.result();
     if (value === 0) {
         result.critical = false;
@@ -1769,7 +1766,6 @@ Game_Action.prototype.executeDamage = function(target, value) {
 };
 
 Game_Action.prototype.executeHpDamage = function(target, value) {
-    console.log("GAMME ACTION EXECUTE HPDAMAGE OBJECTS");
     if (this.isDrain()) {
         value = Math.min(target.hp, value);
     }
@@ -2215,8 +2211,8 @@ Game_BattlerBase.prototype.initialize = function() {
 
 Game_BattlerBase.prototype.initMembers = function() {
     this._hp = 1;
-    this._mp = 1;
-    this._tp = 1;
+    this._mp = 0;
+    this._tp = 0;
     this._hidden = false;
     this.clearParamPlus();
     this.clearStates();
@@ -2342,12 +2338,10 @@ Game_BattlerBase.prototype.die = function() {
     this._hp = 0;
     this.clearStates();
     this.clearBuffs();
-    //this.addState(this.deathStateId())
 };
 
 Game_BattlerBase.prototype.revive = function() {
-    if (this._hp < 1) {
-        this.clearStates();
+    if (this._hp === 0) {
         this._hp = 1;
     }
 };
@@ -2632,7 +2626,6 @@ Game_BattlerBase.prototype.maxTp = function() {
 };
 
 Game_BattlerBase.prototype.refresh = function() {
-    console.log("GAMEBATTLER BASE OBJECT REFRESH");
     this.stateResistSet().forEach(function(stateId) {
         this.eraseState(stateId);
     }, this);
@@ -2675,26 +2668,11 @@ Game_BattlerBase.prototype.isAppeared = function() {
     return !this.isHidden();
 };
 
-Game_BattlerBase.prototype.isDead = function(){
-    //console.log("IS DEAD?");
-    //console.log(this.isAppeared() && this.isDeathStateAffected());
+Game_BattlerBase.prototype.isDead = function() {
     return this.isAppeared() && this.isDeathStateAffected();
 };
 
-// Game_BattlerBase.prototype.isAlive = function(enemy){
-//     //console.log("IS ALIVE?");
-//     if(enemy==undefined){return true;}
-//     if(enemy.isAppeared()){
-//         //if(this._hp>0){console.log("yes"); return true;}this.addNewState(1);
-//         if(enemy._hp>0){return true;}
-//         else{console.log("no");console.log(enemy);return false;}
-//     }else{return false;}
-//     //return (this.isAppeared() && this._hp > 0);
-// };
-
 Game_BattlerBase.prototype.isAlive = function() {
-    //console.log("IS ALIVE?");
-    //console.log(this.isAppeared() && !this.isDeathStateAffected());
     return this.isAppeared() && !this.isDeathStateAffected();
 };
 
@@ -2748,7 +2726,6 @@ Game_BattlerBase.prototype.restriction = function() {
 };
 
 Game_BattlerBase.prototype.addNewState = function(stateId) {
-    console.log("add New State");
     if (stateId === this.deathStateId()) {
         this.die();
     }
@@ -3039,21 +3016,16 @@ Game_Battler.prototype.clearResult = function() {
 
 Game_Battler.prototype.refresh = function() {
     Game_BattlerBase.prototype.refresh.call(this);
-    if (this.hp == 0) {
+    if (this.hp === 0) {
         this.addState(this.deathStateId());
     } else {
         this.removeState(this.deathStateId());
     }
 };
 
-
-
-
 Game_Battler.prototype.addState = function(stateId) {
     if (this.isStateAddable(stateId)) {
-        console.log("IT IS ADDABLE");
         if (!this.isStateAffected(stateId)) {
-            console.log("IS NOT STATE AFFECTED");
             this.addNewState(stateId);
             this.refresh();
         }
@@ -3063,12 +3035,10 @@ Game_Battler.prototype.addState = function(stateId) {
 };
 
 Game_Battler.prototype.isStateAddable = function(stateId) {
-    console.log("IS STATE ADDABLE?");
-    console.log(stateId);
-    console.log(this.isAlive() && $dataStates[stateId] && !this.isStateResist(stateId) && !this._result.isStateRemoved(stateId) && !this.isStateRestrict(stateId));
-    console.log(this.isAlive());
-    console.log(!this.isStateRestrict(stateId));
-    return (this.isAlive() && $dataStates[stateId] && !this.isStateResist(stateId) && !this._result.isStateRemoved(stateId) && !this.isStateRestrict(stateId));
+    return (this.isAlive() && $dataStates[stateId] &&
+            !this.isStateResist(stateId) &&
+            !this._result.isStateRemoved(stateId) &&
+            !this.isStateRestrict(stateId));
 };
 
 Game_Battler.prototype.isStateRestrict = function(stateId) {
@@ -3106,7 +3076,6 @@ Game_Battler.prototype.escape = function() {
 };
 
 Game_Battler.prototype.addBuff = function(paramId, turns) {
-    //console.log("ADD BUFF");
     if (this.isAlive()) {
         this.increaseBuff(paramId);
         if (this.isBuffAffected(paramId)) {
@@ -3118,7 +3087,6 @@ Game_Battler.prototype.addBuff = function(paramId, turns) {
 };
 
 Game_Battler.prototype.addDebuff = function(paramId, turns) {
-    //console.log("ADD DEBUFF");
     if (this.isAlive()) {
         this.decreaseBuff(paramId);
         if (this.isDebuffAffected(paramId)) {
@@ -3130,7 +3098,6 @@ Game_Battler.prototype.addDebuff = function(paramId, turns) {
 };
 
 Game_Battler.prototype.removeBuff = function(paramId) {
-    //console.log("REMOVE BUFF");
     if (this.isAlive() && this.isBuffOrDebuffAffected(paramId)) {
         this.eraseBuff(paramId);
         this._result.pushRemovedBuff(paramId);
@@ -3246,7 +3213,6 @@ Game_Battler.prototype.consumeItem = function(item) {
 };
 
 Game_Battler.prototype.gainHp = function(value) {
-    console.log("GBB GAINHP OBJECTS");
     this._result.hpDamage = -value;
     this._result.hpAffected = true;
     this.setHp(this.hp + value);
@@ -3304,7 +3270,6 @@ Game_Battler.prototype.regenerateTp = function() {
 };
 
 Game_Battler.prototype.regenerateAll = function() {
-    //console.log("REGENERATEALL");
     if (this.isAlive()) {
         this.regenerateHp();
         this.regenerateMp();
@@ -3443,7 +3408,6 @@ Game_Battler.prototype.performCollapse = function() {
 // The game object class for an actor.
 
 function Game_Actor() {
-    console.log("GAME ACTOR APPLY OBJECTS");
     this.initialize.apply(this, arguments);
 }
 
@@ -4120,8 +4084,6 @@ Game_Actor.prototype.performCounter = function() {
 };
 
 Game_Actor.prototype.performCollapse = function() {
-    console.log("PERFORM COLLAPSE");
-    //this.addState(1);
     Game_Battler.prototype.performCollapse.call(this);
     if ($gameParty.inBattle()) {
         SoundManager.playActorCollapse();
@@ -4669,19 +4631,9 @@ Game_Unit.prototype.members = function() {
 };
 
 Game_Unit.prototype.aliveMembers = function() {
-    //console.log("ALIVEMEMBERS");
-    var is_all_alive = 0;
-    var memberAliveArray = [];
-    this.members().forEach(function(member){
-        console.log(member);
-        if(member._hp < 1){
-            is_all_alive+=1;
-            memberAliveArray.push(member);
-        }
-        //if(member.isAlive()){is_all_alive+=1;memberAliveArray.push(member);}
+    return this.members().filter(function(member) {
+        return member.isAlive();
     });
-    return memberAliveArray;
-    //return this.members().filter(function(member){ return member.isAlive();});
 };
 
 Game_Unit.prototype.deadMembers = function() {
@@ -4733,22 +4685,25 @@ Game_Unit.prototype.randomTarget = function() {
 
 Game_Unit.prototype.randomDeadTarget = function() {
     var members = this.deadMembers();
-    if (members.length === 0) { return null; }
+    if (members.length === 0) {
+        return null;
+    }
     return members[Math.floor(Math.random() * members.length)];
 };
 
 Game_Unit.prototype.smoothTarget = function(index) {
-    if (index < 0) { index = 0; }
+    if (index < 0) {
+        index = 0;
+    }
     var member = this.members()[index];
-    //console.log("SMOOTH TARGET");
     return (member && member.isAlive()) ? member : this.aliveMembers()[0];
 };
 
 Game_Unit.prototype.smoothDeadTarget = function(index) {
-    if (index < 0) { index = 0; }
+    if (index < 0) {
+        index = 0;
+    }
     var member = this.members()[index];
-    console.log("SMOOTH DEAD");
-    console.log((member && member.isDead()) ? member : this.deadMembers()[0]);
     return (member && member.isDead()) ? member : this.deadMembers()[0];
 };
 
@@ -4773,7 +4728,6 @@ Game_Unit.prototype.onBattleEnd = function() {
 };
 
 Game_Unit.prototype.makeActions = function() {
-    console.log("GAMEUNITY MAKE ACTIONS OBJECTs");
     this.members().forEach(function(member) {
         member.makeActions();
     });
@@ -4789,45 +4743,23 @@ Game_Unit.prototype.select = function(activeMember) {
     });
 };
 
-
-
-Game_Unit.prototype.isAllDead = function(enemiesInTroop) {
-    //console.log("IS ALL DEAD ENEMY?");
-    //console.log(enemiesInTroop);
-    var are_they_dead = 0;
-    enemiesInTroop.forEach(function(member){
-        if(member._hp > 0){
-            are_they_dead+=0;
-            // console.log(member);
-            // console.log("THEY ALIVE");
-        }else{
-            member.addState(1);
-            // console.log(member);
-            // console.log("THEY DEAD");
-            are_they_dead+=1;
-        }
-    });
-    return are_they_dead == enemiesInTroop.length ? true : false;
+Game_Unit.prototype.isAllDead = function() {
+    return this.aliveMembers().length === 0;
 };
 
 Game_Unit.prototype.isAllCalm = function(enemiesInTroop) {
-    //console.log("IS CALM?");
+    console.log("IS CALM?");
     var are_they_calm = 0;
     this.members().forEach(function(member){
         if(member._tp < 2){
-            //console.log("THEY CALM");
+            console.log("HE CALM");
             are_they_calm+=1;
         }else{
-            //console.log("NOT CALM");
+            console.log("NOT CALM");
             are_they_calm = 0;
         }
     });
     return are_they_calm == enemiesInTroop.length ? true : false;
-    // var areTheyCalm = [];
-    // this.members().forEach(function(member) {
-    //     if (member._tp < 2){areTheyCalm.push(true);}
-    // });
-    // return areTheyCalm.length == enemiesInTroop.length ? true : false;
 };
 
 Game_Unit.prototype.substituteBattler = function() {
@@ -5138,26 +5070,21 @@ Game_Party.prototype.canInput = function() {
 };
 
 Game_Party.prototype.isAllDead = function() {
-    //console.log("ISALLDEAD? PARTY");
-    var is_all_dead = 0;
-    this.members().forEach(function(actor){
-        if(actor._hp<=0){is_all_dead+=1;}
-    });
-    return is_all_dead == this.members().length ? true : false;
-    // if (Game_Unit.prototype.isAllDead.call(this)) {
-    //     return this.inBattle() || !this.isEmpty();
-    // } else {
-    //     return false;
-    // }
+    if (Game_Unit.prototype.isAllDead.call(this)) {
+        return this.inBattle() || !this.isEmpty();
+    } else {
+        return false;
+    }
 };
 
 Game_Party.prototype.isAllCalm = function(){
     var is_all_calm = 0;
     this.members().forEach(function(actor){
-        if(actor._tp<=2){is_all_calm+=1;}
+        if(actor._tp < 2){is_all_calm+=1;}
     });
-    return is_all_calm == this.members().length ? true : false;
-}
+    console.log(this.members());
+    return is_all_calm == this.members().length;
+};
 
 Game_Party.prototype.onPlayerWalk = function() {
     this.members().forEach(function(actor) {
@@ -5382,7 +5309,6 @@ Game_Troop.prototype.setup = function(troopId) {
 };
 
 Game_Troop.prototype.makeUniqueNames = function() {
-    //console.log("UNIQUE NAMES");
     var table = this.letterTable();
     this.members().forEach(function(enemy) {
         if (enemy.isAlive() && enemy.isLetterEmpty()) {
@@ -5406,7 +5332,6 @@ Game_Troop.prototype.letterTable = function() {
 };
 
 Game_Troop.prototype.enemyNames = function() {
-    console.log("ENEMY NAMES");
     var names = [];
     this.members().forEach(function(enemy) {
         var name = enemy.originalName();
@@ -9160,8 +9085,6 @@ Game_Interpreter.prototype.operateValue = function(operation, operandType, opera
 };
 
 Game_Interpreter.prototype.changeHp = function(target, value, allowDeath) {
-    console.log("CHANGE HP");
-    console.log(allowDeath);
     if (target.isAlive()) {
         if (!allowDeath && target.hp <= -value) {
             value = 1 - target.hp;
@@ -10353,7 +10276,6 @@ Game_Interpreter.prototype.command313 = function() {
         } else {
             actor.removeState(this._params[3]);
         }
-        //if (actor._hp < 1) {
         if (actor.isDead() && !alreadyDead) {
             actor.performCollapse();
         }
@@ -10547,7 +10469,6 @@ Game_Interpreter.prototype.command336 = function() {
 
 // Show Battle Animation
 Game_Interpreter.prototype.command337 = function() {
-    //console.log("COMMAND337");
     if (this._params[2] == true) {
         this.iterateEnemyIndex(-1,function(enemy) {
             if (enemy.isAlive()) {

@@ -2170,7 +2170,6 @@ BattleManager.initMembers = function() {
     this._escaped = false;
     this._rewards = {};
     this._turnForced = false;
-    this._convocombo = [1,2,3];//{"mostrecent":1,"secondrecent":2,"oldest":3};
 };
 
 BattleManager.isBattleTest = function() {
@@ -2478,7 +2477,6 @@ BattleManager.updateTurnEnd = function() {
 };
 
 BattleManager.getNextSubject = function() {
-    console.log("GET NEXT SUBJECT 2480 rpg manager");
     for (;;) {
         var battler = this._actionBattlers.shift();
         if (!battler) {
@@ -2486,8 +2484,6 @@ BattleManager.getNextSubject = function() {
         }
         if (battler.isBattleMember() && battler.isAlive()) {
             return battler;
-        }else{
-            return null;
         }
     }
 };
@@ -2546,7 +2542,7 @@ BattleManager.invokeAction = function(subject, target) {
         this.invokeCounterAttack(subject, target);
     } else if (Math.random() < this._action.itemMrf(target)) {
         this.invokeMagicReflection(subject, target);
-    } else if (target.isStateAffected(24)) {
+    } else if (target.isStateAffected(24)){
         console.log("DEFLECTED");
         this.invokeDeflectWTF(subject, target);
     } else {
@@ -2570,6 +2566,7 @@ BattleManager.invokeCounterAttack = function(subject, target) {
     this._logWindow.displayCounter(target);
     this._logWindow.displayActionResults(target, subject);
 };
+    
 
 BattleManager.invokeDeflectWTF = function(subject, target) {
     this._action._reflectionTarget = target;
@@ -2626,44 +2623,20 @@ BattleManager.abort = function() {
     this._phase = 'aborting';
 };
 
-// BattleManager.checkBattleEnd = function() {
-// 	console.log("CHECKBATTLEEND");
-//     if (this._phase) {
-//         console.log("CHECKPHASAE");
-//         console.log(this._phase);
-//         console.log("CHECKDEAD");
-//         console.log($gameTroop);
-//         console.log($gameTroop.isAllDead());
-//         if (this.checkAbort()) {
-//             return true;
-//         }
-//         if ($gameParty.isAllDead()) {
-//             console.log("LOSER");
-//             this.processDefeat();
-//             return true;
-//         }
-//         if ($gameTroop.isAllDead()) {
-//             console.log("WINNER");
-//             this.processVictory();
-//             return true;
-//         }
-//         if ($gameTroop.isAllCalm($gameTroop._enemies)) {
-//             console.log("PEACEFULWIN");
-//             this.processTalkVictory();
-//             return true;
-//         }
-//     }
-//     return false;
-// };
-
-
-// BattleManager.checkEnrage = function(actor) {
-// 	console.log("CHECK ENRAGE");
-// 	if (actor.tp >= actor.maxTp()*0.96){
-// 		console.log(actor.tp);
-// 		actor.addState(7);
-// 	}
-// };
+BattleManager.checkBattleEnd = function() {
+    if (this._phase) {
+        if (this.checkAbort()) {
+            return true;
+        } else if ($gameParty.isAllDead()) {
+            this.processDefeat();
+            return true;
+        } else if ($gameTroop.isAllDead()) {
+            this.processVictory();
+            return true;
+        }
+    }
+    return false;
+};
 
 BattleManager.checkAbort = function() {
     if ($gameParty.isEmpty() || this.isAborting()) {
@@ -2674,50 +2647,34 @@ BattleManager.checkAbort = function() {
     return false;
 };
 
-// BattleManager.processVictory = function() {
-// 	this._phase = 'aborting';
-//     this._victoryPhase = true;
-// 	console.log("VIOLENCE VICTORY");
-//     $gameParty.removeBattleStates();
-//     $gameParty.performVictory();
-//     this.playVictoryMe();
-//     this.replayBgmAndBgs();
-//     this.makeRewards();
-//     this.displayVictoryMessage();
-//     this.displayRewards();
-//     this.gainRewards();
-//     this.endBattle(0);
-// };
+BattleManager.processVictory = function() {
+    $gameParty.removeBattleStates();
+    $gameParty.performVictory();
+    this.playVictoryMe();
+    this.replayBgmAndBgs();
+    this.makeRewards();
+    this.displayVictoryMessage();
+    this.displayRewards();
+    this.gainRewards();
+    this.endBattle(0);
+};
 
-// BattleManager.processTalkVictory = function() {
-//     this._victoryPhase = true;
-// 	this._phase = 'aborting';
-//     $gameTemp.reserveCommonEvent(1);
-//     console.log("TALK VICTORY");
-//     $gameParty.removeBattleStates();
-//     $gameParty.performVictory();
-//     this.playTalkVictoryMe();
-//     this.replayBgmAndBgs();
-//     this.displayTalkVictoryMessage();
-//     this.endBattle(5);
-// };
-
-// BattleManager.processEscape = function() {
-//     $gameParty.performEscape();
-//     SoundManager.playEscape();
-//     var success = this._preemptive ? true : (Math.random() < this._escapeRatio);
-//     if (success) {
-//         this.displayEscapeSuccessMessage();
-//         this._escaped = true;
-//         this.processAbort();
-//     } else {
-//         this.displayEscapeFailureMessage();
-//         this._escapeRatio += 0.1;
-//         $gameParty.clearActions();
-//         this.startTurn();
-//     }
-//     return success;
-// };
+BattleManager.processEscape = function() {
+    $gameParty.performEscape();
+    SoundManager.playEscape();
+    var success = this._preemptive ? true : (Math.random() < this._escapeRatio);
+    if (success) {
+        this.displayEscapeSuccessMessage();
+        this._escaped = true;
+        this.processAbort();
+    } else {
+        this.displayEscapeFailureMessage();
+        this._escapeRatio += 0.1;
+        $gameParty.clearActions();
+        this.startTurn();
+    }
+    return success;
+};
 
 BattleManager.processAbort = function() {
     $gameParty.removeBattleStates();
@@ -2736,17 +2693,6 @@ BattleManager.processDefeat = function() {
     this.endBattle(2);
 };
 
-BattleManager.processTalkDefeat = function() {
-    this.displayTalkDefeatMessage();
-    this.playDefeatMe();
-    if (this._canLose) {
-        this.replayBgmAndBgs();
-    } else {
-        AudioManager.stopBgm();
-    }
-    this.endBattle(2);
-};
-
 BattleManager.endBattle = function(result) {
     this._phase = 'battleEnd';
     if (this._eventCallback) {
@@ -2755,7 +2701,7 @@ BattleManager.endBattle = function(result) {
     if (result === 0) {
         $gameSystem.onBattleWin();
     } else if (result === 5) {
-        $gameSystem.onTalkWin();
+        $gameSystem.onTalkWin(); 
     } else if (this._escaped) {
         $gameSystem.onBattleEscape();
     }
@@ -2790,7 +2736,7 @@ BattleManager.displayVictoryMessage = function() {
 };
 
 BattleManager.displayTalkVictoryMessage = function() {
-	$gameMessage.add(TextManager.talkVictory.format($gameParty.name()));
+    $gameMessage.add(TextManager.talkVictory.format($gameParty.name()));
 };
 
 BattleManager.displayDefeatMessage = function() {
