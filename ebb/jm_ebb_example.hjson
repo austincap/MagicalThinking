@@ -41,7 +41,7 @@
         {"image": "094", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":16}, "palette_shift": 16, "scroll": [1, 1]},
         {"image": "286", "image_mode": "tiled", "effect":{"type":"horizontal","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [-1, 1]},
         {"image": "291", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":4,"frequency":16}, "palette_shift": 8, "scroll": [0, 1]},
-        {"image": "305", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":4}, "palette_shift": 4, "scroll": [0, 1]},
+        {"image": "305", "image_mode": "stretched", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":16}, "palette_shift": 16, "scroll": [0, 1]},
         {"image": "306", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 4, "scroll": [0, 1]},
         {"image": "107", "image_mode": "tiled", "effect":{"type":"vertical","amplitude":2,"frequency":8}, "palette_shift": 4, "scroll": [1, 1]},
         {"image": "098", "image_mode": "tiled", "effect":{"type":"horizontal_interlaced","amplitude":1,"frequency":8}, "palette_shift": 8, "scroll": [0, 0]},
