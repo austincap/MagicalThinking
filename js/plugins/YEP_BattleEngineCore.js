@@ -2009,7 +2009,7 @@ Yanfly.BEC.BattleManager_endTurn = BattleManager.endTurn;
 BattleManager.endTurn = function() {
 	console.log('END TURN');
     if (this.isTurnBased() && this._spriteset.isPopupPlaying()){
-    	this._phase = 'turnEnd';
+    	//this._phase = 'turnEnd';
     	return;
     }
     if (this.isTurnBased() && this._enteredEndPhase) {
@@ -2019,7 +2019,6 @@ BattleManager.endTurn = function() {
       return;
     }
     this._enteredEndPhase = true;
-    //this._phase = 'turnEnd';
     Yanfly.BEC.BattleManager_endTurn.call(this);
     BattleManager.refreshAllMembers();
 };
@@ -2037,7 +2036,7 @@ BattleManager.getNextSubject = function() {
         this._actionBattlers = battlerArray;
         var battler = this._actionBattlers.shift();
         if (!battler) return null;
-        if (battler.isBattleMember() && battler.isAlive(battler)) {
+        if (battler.isBattleMember() && battler.isAlive()) {
             this.pushPerformedBattler(battler);
             return battler;
         }
@@ -3260,7 +3259,7 @@ Sprite_Actor.prototype.setActorHome = function(index) {
     this._checkAliveStatus = false;
     if ($gameParty.battleMembers()[index]) {
       var actor = $gameParty.battleMembers()[index];
-      if (actor.isAlive(actor)) this._checkAliveStatus = true;
+      if (actor.isAlive()) this._checkAliveStatus = true;
     }
     this.setHome(homeX, homeY);
     this.moveToStartPosition();
@@ -3439,7 +3438,7 @@ Sprite_Damage.prototype.setup = function(target) {
       this.createMiss();
     } else if (result.hpAffected) {
       this.createDigits(0, result.hpDamage);
-    } else if (target.isAlive(target) && result.mpDamage !== 0) {
+    } else if (target.isAlive() && result.mpDamage !== 0) {
       this.createDigits(2, result.mpDamage);
     }
     if (result.critical) {
@@ -3662,6 +3661,7 @@ Game_Action.prototype.speed = function() {
 
 Yanfly.BEC.Game_Action_apply = Game_Action.prototype.apply;
 Game_Action.prototype.apply = function(target) {
+	console.log("YEP BATTLEENGINE APPLY");
     target._result = null;
     target._result = new Game_ActionResult();
     this.subject()._result = null;
@@ -3891,7 +3891,7 @@ Game_Battler.prototype.isSelected = function() {
 Yanfly.BEC.Game_Battler_regenerateAll = Game_Battler.prototype.regenerateAll;
 Game_Battler.prototype.regenerateAll = function() {
     this.clearResult();
-    var lifeState = this.isAlive(this);
+    var lifeState = this.isAlive();
     Yanfly.BEC.Game_Battler_regenerateAll.call(this);
     if ($gameParty.inBattle()) {
       if (!BattleManager.timeBasedStates()) this.updateStateTurns();
@@ -3976,22 +3976,22 @@ Game_Battler.prototype.performResultEffects = function() {
     if (result.hpAffected) {
       if (result.hpDamage > 0 && !result.drain) {
         this.performDamage();
-        this.forceMotionRefresh();
+        //this.forceMotionRefresh();
       }
       if (result.hpDamage < 0) {
         this.performRecovery();
       }
     }
-    if (this.isAlive(this) && result.mpDamage !== 0 && result.mpDamage < 0) {
+    if (this.isAlive() && result.mpDamage !== 0 && result.mpDamage < 0) {
       this.performRecovery();
     }
-    if (this.isAlive(this) && result.tpDamage !== 0 && result.tpDamage < 0) {
+    if (this.isAlive() && result.tpDamage !== 0 && result.tpDamage < 0) {
       this.performRecovery();
     }
-    if (this.isDead()){
-    	console.log("RESULT");
-    	console.log(result);
-    }
+    // if (this.isDead()){
+    // 	console.log("RESULT");
+    // 	console.log(result);
+    // }
 };
 
 Yanfly.BEC.Game_Battler_performDamage = Game_Battler.prototype.performDamage;
@@ -4668,6 +4668,7 @@ Game_Unit.prototype.updateTick = function() {
 };
 
 Game_Unit.prototype.refreshMembers = function() {
+	console.log("GAME UNIT REFRESH MEMBERS BATTLE ENGINGE CORE")
     var group = this.allMembers();
     var length = group.length;
     for (var i = 0; i < length; ++i) {

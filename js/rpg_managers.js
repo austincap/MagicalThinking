@@ -2484,7 +2484,7 @@ BattleManager.getNextSubject = function() {
         if (!battler) {
             return null;
         }
-        if (battler.isBattleMember() && battler.isAlive(battler)) {
+        if (battler.isBattleMember() && battler.isAlive()) {
             return battler;
         }else{
             return null;

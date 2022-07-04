@@ -264,8 +264,6 @@ DataManager.processSTBNotetags1 = function(group) {
 //=============================================================================
 
 BattleManager.isSTB = function() {
-  //console.log("IS STB");
-  //this.refresh();
   return this.isBattleSystem('stb');
 };
 
@@ -394,7 +392,6 @@ BattleManager.endAction = function() {
 };
 
 BattleManager.endSTBAction = function() {
-  //console.log("STB END ACTION");
   this._phase = 'turn';
   if (this._stbInstantCast) {
     this._stbInstantCast = false;
