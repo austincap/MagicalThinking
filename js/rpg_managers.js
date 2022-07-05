@@ -2231,6 +2231,11 @@ BattleManager.playDefeatMe = function() {
     AudioManager.playMe($gameSystem.defeatMe());
 };
 
+BattleManager.playTalkDefeatMe = function() {
+    AudioManager.playMe($gameSystem.talkDefeatMe());
+};
+
+
 BattleManager.replayBgmAndBgs = function() {
     if (this._mapBgm) {
         AudioManager.replayBgm(this._mapBgm);

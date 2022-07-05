@@ -152,9 +152,10 @@ Enemy_Bars.prototype.drawBar = function() {
 			var width = $dataEnemies[enemyId].battlerWidth;
 			var xOffset = $dataEnemies[enemyId].battlerWidth / 2+16;
 			var x = $gameTroop._enemies[i]._screenX - xOffset;
-			var y = $gameTroop._enemies[i]._screenY - 32;
+			var y = $gameTroop._enemies[i]._screenY - 28;
 			//Draw the guage
 			this.drawGauge(x, y, width, rate , this.guageColor(rate), this.guageColor(rate));
+			this.drawText("HP", x, y, this.contents.width, 'left');
 		};
 		if(currentTp > 0 && enabled){
 			//Max hp defined from the enemies parameters.
@@ -173,9 +174,10 @@ Enemy_Bars.prototype.drawBar = function() {
 			var width = $dataEnemies[enemyId].battlerWidth;
 			var xOffset = $dataEnemies[enemyId].battlerWidth / 2 + 16;
 			var x = $gameTroop._enemies[i]._screenX - xOffset;
-			var y = $gameTroop._enemies[i]._screenY - 42;
+			var y = $gameTroop._enemies[i]._screenY - 8;
 			//Draw the guage
 			this.drawGauge(x, y, width, tprate , this.tpgaugeColor(tprate), this.tpgaugeColor(tprate));
+			this.drawText("WTF", x, y+10, this.contents.width, 'left');
 		};
 	};
  };

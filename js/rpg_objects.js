@@ -244,6 +244,14 @@ Game_System.prototype.onTalkDefeat = function(){
     console.log("talk defeat");
 };
 
+Game_System.prototype.talkDefeatMe = function() {
+    return this._talkDefeatMe || $dataSystem.talkDefeatMe;
+};
+
+Game_System.prototype.setTalkDefeatMe = function(value) {
+    this._talkefeatMe = value;
+};
+
 Game_System.prototype.onBeforeSave = function() {
     this._saveCount++;
     this._versionId = $dataSystem.versionId;

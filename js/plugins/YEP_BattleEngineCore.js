@@ -1858,13 +1858,13 @@ BattleManager.processTalkVictory = function(gameTroop) {
 
 BattleManager.processTalkDefeat = function() {
     this.displayTalkDefeatMessage();
-    this.playDefeatMe();
+    this.playTalkDefeatMe();
     if (this._canLose) {
         this.replayBgmAndBgs();
     } else {
         AudioManager.stopBgm();
     }
-    this.endBattle(2);
+    this.processEscape();
 }; 
 
 BattleManager.processEscape = function() {
